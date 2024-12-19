@@ -16,3 +16,15 @@ MLflow Integration:
     sudo apt install python3-pip
     pip install mlflow
     ```
+
+    b:Run MLflow tracking server on cloud platform and Ensure the server can store experiment data and artifacts
+
+    ```
+    mlflow server --host 0.0.0.0 --port 8080 --backend-store-uri sqlite:///mlflow.db --default-artifact-root ./mlruns
+    ```
+    
+    - --backend-store-uri: Path to the database to store metadata. Using SQLite for simplicity.
+    - --default-artifact-root: Location to store artifacts such as models, logs, etc.
+    - --host: Set to 0.0.0.0 to allow access from other devices.
+    - --port: Port on which the server will run.
+    Now the MLflow UI is running, Navigate to http://37.152.191.193:8080/ .
