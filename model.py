@@ -31,7 +31,7 @@ from datetime import datetime
 
 # model tracking function
 
-def log_detailed_metrics_to_mlflow(model, y_test, y_pred, cv_scores, best_params):
+def log_metrics_to_mlflow(model, y_test, y_pred, cv_scores, best_params):
     """
     Logs detailed metrics and parameters to MLflow.
     
