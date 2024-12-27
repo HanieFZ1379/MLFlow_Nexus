@@ -2,7 +2,7 @@ import mlflow
 import pandas as pd
 
 # Experiment name
-experiment_name = 'iris classifier'
+experiment_name = 'Heart Disease Prediction'
 
 # Get experiment by name
 experiment = mlflow.get_experiment_by_name(experiment_name)
