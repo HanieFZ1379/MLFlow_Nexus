@@ -1,8 +1,9 @@
 import mlflow
 import pandas as pd
 
+mlflow.set_tracking_uri('http://37.152.191.193:8080/')
 # Experiment name
-experiment_name = 'Heart Disease Prediction'
+experiment_name = 'Heart Disease Prediction1'
 
 # Get experiment by name
 experiment = mlflow.get_experiment_by_name(experiment_name)
