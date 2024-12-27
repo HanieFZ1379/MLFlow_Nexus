@@ -121,7 +121,7 @@ def run_single_experiment():
     X_train, X_test, y_train, y_test = prepare_data()
     
     mlflow.set_tracking_uri('http://37.152.191.193:8080/')
-    mlflow.set_experiment('Heart Disease Prediction1')
+    mlflow.set_experiment('Heart Disease Prediction - Manual')
     
     # Get parameters from user
     params = get_user_parameters()
@@ -189,147 +189,14 @@ def continue_running():
             return response.startswith('y')
         print("Please enter 'yes' or 'no'.")
 
-def find_best_model(experiment_name):
-    """Find the best performing model from all runs in an experiment"""
-    client = MlflowClient()
-    experiment = client.get_experiment_by_name(experiment_name)
-    
-    if experiment is None:
-        raise ValueError(f"Experiment '{experiment_name}' not found")
-    
-    # Search all runs in the experiment
-    runs = client.search_runs(
-        experiment_ids=[experiment.experiment_id],
-        order_by=["metrics.accuracy DESC"]
-    )
-    
-    if not runs:
-        raise ValueError("No runs found in the experiment")
-    
-    best_run = runs[0]
-    print("\nBest Model Details:")
-    print(f"Run ID: {best_run.info.run_id}")
-    print(f"Accuracy: {best_run.data.metrics['accuracy']:.4f}")
-    print(f"CV Mean: {best_run.data.metrics['cv_mean']:.4f}")
-    print("Parameters:")
-    for param_name, param_value in best_run.data.params.items():
-        print(f"  {param_name}: {param_value}")
-    
-    return best_run
-
-def register_best_model(experiment_name, model_name, description=None):
-    """Register the best model from an experiment in the model registry"""
-    try:
-        client = MlflowClient()
-        
-        # Find the best performing run
-        best_run = find_best_model(experiment_name)
-        
-        # Create or get registered model
-        try:
-            registered_model = client.create_registered_model(
-                name=model_name,
-                description=description or f"Best performing model from {experiment_name}"
-            )
-            print(f"\nCreated new registered model: '{model_name}'")
-        except Exception as e:
-            print(f"\nModel '{model_name}' already exists, creating new version")
-        
-        # Create new model version
-        model_version = client.create_model_version(
-            name=model_name,
-            source=f"runs:/{best_run.info.run_id}/model",
-            run_id=best_run.info.run_id,
-            description=f"Model accuracy: {best_run.data.metrics['accuracy']:.4f}"
-        )
-        
-        # Wait for model version to be ready
-        print("Waiting for model version to be ready...")
-        while model_version.status not in ["READY", "FAILED"]:
-            model_version = client.get_model_version(model_name, model_version.version)
-        
-        if model_version.status == "READY":
-            # Transition model version to production
-            client.transition_model_version_stage(
-                name=model_name,
-                version=model_version.version,
-                stage="Production",
-                archive_existing_versions=True
-            )
-            
-            print(f"\nModel Registration Success:")
-            print(f"Name: {model_name}")
-            print(f"Version: {model_version.version}")
-            print(f"Stage: Production")
-            print(f"Run ID: {best_run.info.run_id}")
-            
-            # Log registration as tags in the run
-            client.set_tag(best_run.info.run_id, "registered_model_name", model_name)
-            client.set_tag(best_run.info.run_id, "registered_model_version", model_version.version)
-            
-            return model_version
-        else:
-            print(f"Error: Model version status is {model_version.status}")
-            return None
-            
-    except Exception as e:
-        print(f"Error registering model: {e}")
-        return None
-
-def manage_model_registry():
-    """Interactive function to manage model registration"""
-    print("\nModel Registry Management")
-    print("-" * 50)
-    
-    # Get experiment name
-    experiment_name = input("Enter the experiment name to find the best model from: ") or "Heart Disease Prediction1"
-    
-    # Get model name for registry
-    model_name = input("Enter name for the registered model: ") or "heart_disease_classifier"
-    
-    # Get optional description
-    description = input("Enter model description (optional): ")
-    
-    # Register the model
-    print("\nRegistering best model...")
-    registered_model = register_best_model(
-        experiment_name=experiment_name,
-        model_name=model_name,
-        description=description
-    )
-    
-    if registered_model:
-        print("\nModel registered successfully!")
-        
-        # Ask if user wants to see all registered models
-        if input("\nDo you want to see all registered models? (yes/no): ").lower().startswith('y'):
-            client = MlflowClient()
-            registered_models = client.search_registered_models()
-            
-            print("\nRegistered Models:")
-            print("-" * 50)
-            for rm in registered_models:
-                print(f"\nModel: {rm.name}")
-                print(f"Description: {rm.description}")
-                print(f"Latest Version: {rm.latest_versions[0].version}")
-                print(f"Stage: {rm.latest_versions[0].current_stage}")
-                print(f"Creation Time: {datetime.fromtimestamp(rm.creation_timestamp/1000.0)}")
-
 # Main execution
 if __name__ == "__main__":
     print("Welcome to Heart Disease Prediction Model Experimentation")
     
-    # Run experiments
     while True:
         run_single_experiment()
         if not continue_running():
             break
     
-    print("\nAll experiments completed.")
-    
-    # Ask if user wants to register a model
-    if input("\nDo you want to register the best performing model? (yes/no): ").lower().startswith('y'):
-        manage_model_registry()
-    
-    print("\nProcess completed. You can view all details in MLflow UI.")
+    print("\nAll experiments completed. You can view the results in MLflow UI.")
     print("MLflow UI URL: http://37.152.191.193:8080")
