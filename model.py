@@ -120,7 +120,7 @@ def run_single_experiment():
     # Prepare the data
     X_train, X_test, y_train, y_test = prepare_data()
     
-    mlflow.set_tracking_uri('http://37.152.191.193:8080/')
+    mlflow.set_tracking_uri('http://127.0.0.1:5000/')
     mlflow.set_experiment('Heart Disease Prediction1')
     
     # Get parameters from user
@@ -332,4 +332,4 @@ if __name__ == "__main__":
         manage_model_registry()
     
     print("\nProcess completed. You can view all details in MLflow UI.")
-    print("MLflow UI URL: http://37.152.191.193:8080")
+    print("MLflow UI URL: http://127.0.0.1:5000/")
