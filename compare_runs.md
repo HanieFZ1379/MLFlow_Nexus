@@ -67,15 +67,24 @@ Each run’s performance and parameters were analyzed:
 
 ## 4. Model Performance Comparison
 
+The chart below summarizes the performance metrics for all runs:
+- **Accuracy vs. Run Name**: Shows how accuracy varies across different runs.
+  - The highest accuracy achieved was **91.8%** 
+  - The lowest accuracy recorded was **75.41%** 
+
+![Accuracy vs Run Name](compare_runs_images/accuracy_vs_run_name.jpg)
+
+
 In the plot below, you can see the comparison of different metrics and their corresponding accuracy. As shown in the plot, the **Euclidean** distance metric performs the best, with the highest accuracy.
 
-![Metric vs Accuracy Comparison](compare_runs_images/metric_vs_accuracy.jpg)
+![Metric vs Accuracy Comparison](images/metric_vs_accuracy.jpg)
 
 ### Plot Analysis
 - The **Euclidean** metric, as shown in the plot, leads to the highest accuracy, making it the best choice for our model.
 - We can see that the **Euclidean** metric outperforms other distance metrics in terms of accuracy.
 
 ---
+
 
 ## 5. Next Steps
 
