@@ -2,7 +2,7 @@ import mlflow
 import pandas as pd
 
 # Set the tracking URI for MLflow server
-mlflow.set_tracking_uri('http://37.152.191.193:8080')
+mlflow.set_tracking_uri('http://37.152.191.193:8080/')
 
 # Experiment name
 experiment_name = 'Heart Disease Prediction1'
