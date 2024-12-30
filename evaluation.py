@@ -4,7 +4,7 @@ import time
 from sklearn.metrics import accuracy_score
 
 # Set the tracking URI for the MLflow server
-mlflow.set_tracking_uri("http://37.152.191.193:8080/") 
+mlflow.set_tracking_uri("http://37.152.191.193:8080") 
 print(f"Tracking URI: {mlflow.get_tracking_uri()}")
 
 # Step 1: Load the Deployed Model
