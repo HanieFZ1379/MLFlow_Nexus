@@ -72,7 +72,7 @@ The chart below summarizes the performance metrics for all runs:
   - The highest accuracy achieved was **91.8%** 
   - The lowest accuracy recorded was **75.41%** 
 
-![Accuracy vs Run Name](compare_runs_images/accuracy_vs_run_name.jpg)
+![Accuracy vs Run Name](compare_runs_images/accuracy_vs_run_name.png)
 
 
 In the plot below, you can see the comparison of different metrics and their corresponding accuracy. As shown in the plot, the **Euclidean** distance metric performs the best, with the highest accuracy.
