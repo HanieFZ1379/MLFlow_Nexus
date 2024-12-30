@@ -2,7 +2,7 @@ import mlflow
 import pandas as pd
 
 # Set the tracking URI for MLflow server
-mlflow.set_tracking_uri('http://127.0.0.1:5000/')
+mlflow.set_tracking_uri('http://37.152.191.193:8080')
 
 # Experiment name
 experiment_name = 'Heart Disease Prediction1'
@@ -45,7 +45,7 @@ else:
 
         # Start an MLflow run to log artifacts
         with mlflow.start_run(experiment_id=experiment_id):
-            # Log the report file as an artifact (without the model .pkl file)
+            # Log the report file as an artifact 
             mlflow.log_artifact(report_file)
 
             # Print detailed metrics for all runs and log them as an artifact
