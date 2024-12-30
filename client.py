@@ -2,7 +2,7 @@ import mlflow
 import pandas as pd
 
 # The tracking URI for the MLflow server
-mlflow.set_tracking_uri("http://127.0.0.1:5000/")
+mlflow.set_tracking_uri("http://37.152.191.193:8080/")
 
 # Step 1: Load the Deployed Model
 logged_model = "models:/heart_disease_classifier/2"  
