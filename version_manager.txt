@@ -1,4 +1,4 @@
-Tracking URI: http://127.0.0.1:5000/
+Tracking URI: http://37.152.191.193:8080/
 
 Experiment ID: 332425260785487175
 Experiment Name: Heart Disease Prediction1
