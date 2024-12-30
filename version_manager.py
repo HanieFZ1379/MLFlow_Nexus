@@ -2,7 +2,7 @@ import mlflow
 from mlflow.tracking import MlflowClient
 
 # The tracking URI for the MLflow server
-mlflow.set_tracking_uri("http://127.0.0.1:5000/")
+mlflow.set_tracking_uri("http://37.152.191.193:8080/")
 print(f"Tracking URI: {mlflow.get_tracking_uri()}")
 
 # Initialize the MLflow client
