@@ -1,4 +1,4 @@
-Tracking URI: http://37.152.191.193:8080/
+Tracking URI: http://37.152.191.193:8080
 Model Used: models:/heart_disease_classifier/2
 
 Test Dataset:
