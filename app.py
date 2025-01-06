@@ -12,7 +12,15 @@ app = Flask(__name__)
 def predict():
     data = request.get_json()
     input_data = data['features']
+    # Log inputs for debugging
+    print(f"Received Input: {input_data}")
     prediction = int(loaded_model.predict([input_data])[0])
+    # Log output prediction
+    if prediction == 1:
+        print(f"Prediction: Heart Disease")
+    else:
+        # Log output prediction
+        print(f"Prediction: No Disease")
     return jsonify({'prediction': prediction})
 
 
