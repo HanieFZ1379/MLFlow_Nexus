@@ -1,5 +1,5 @@
-Tracking URI: http://37.152.191.193:8080
-Model Used: models:/heart_disease_classifier/2
+Tracking URI: http://127.0.0.1:5000
+Model Used: models:/heart_disease_classifier/1
 
 Test Dataset:
          age  sex   cp  trestbps      chol  fbs  restecg   thalach  exang  oldpeak  slope   ca  thal
@@ -18,19 +18,19 @@ Test Dataset:
 12  0.916667  1.0  0.0  0.724138  0.066667  1.0      1.0  0.292308    0.0  0.96875    1.0  2.0   3.0
 
 Predictions:
-Sample 1: Heart Disease
-Sample 2: Heart Disease
+Sample 1: No Disease
+Sample 2: No Disease
 Sample 3: Heart Disease
-Sample 4: Heart Disease
+Sample 4: No Disease
 Sample 5: No Disease
 Sample 6: No Disease
 Sample 7: No Disease
 Sample 8: No Disease
-Sample 9: Heart Disease
-Sample 10: Heart Disease
+Sample 9: No Disease
+Sample 10: No Disease
 Sample 11: No Disease
 Sample 12: No Disease
 Sample 13: No Disease
 
-Accuracy: 76.92%
-Average Latency per Prediction: 0.0066 seconds
+Accuracy: 53.85%
+Average Latency per Prediction: 0.0002 seconds
