@@ -1,3 +1,0 @@
-Prediction Results:
-Sample 1: Heart Disease
-Sample 2: No Disease

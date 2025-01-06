@@ -27,6 +27,7 @@ def test_predict(client):
     ]
 
     failed_cases = []
+    predictions = []  # Store predictions for display
     latencies = []
     correct_predictions = 0
 
@@ -37,16 +38,34 @@ def test_predict(client):
         latencies.append(elapsed_time)
 
         if response.status_code != 200:
-            failed_cases.append({"index": idx, "features": features, "error": "HTTP Error", "status_code": response.status_code})
+            failed_cases.append({
+                "index": idx,
+                "features": features,
+                "error": "HTTP Error",
+                "status_code": response.status_code
+            })
             continue
 
         try:
             data = response.get_json()
             prediction = data.get("prediction")
+            predictions.append({
+                "index": idx,
+                "features": features,
+                "ground_truth": ground_truth,
+                "prediction": prediction,
+                "status": "Correct" if prediction == ground_truth else "Incorrect"
+            })
             if prediction == ground_truth:
                 correct_predictions += 1
             else:
-                failed_cases.append({"index": idx, "features": features, "error": "Incorrect prediction", "prediction": prediction, "ground_truth": ground_truth})
+                failed_cases.append({
+                    "index": idx,
+                    "features": features,
+                    "error": "Incorrect prediction",
+                    "prediction": prediction,
+                    "ground_truth": ground_truth
+                })
         except Exception as e:
             failed_cases.append({"index": idx, "features": features, "error": str(e)})
 
@@ -55,17 +74,18 @@ def test_predict(client):
 
     # Log statistics
     average_latency = sum(latencies) / len(latencies)
+    print(f"\n=== Test Results ===")
     print(f"Accuracy: {accuracy * 100:.2f}%")
     print(f"Average Latency: {average_latency:.4f} seconds")
-    print(f"Failed Cases: {len(failed_cases)}")
-    for case in failed_cases:
-        print(f"Case {case['index']}: {case['error']} - Features: {case['features']}")
+    print(f"Failed Cases: {len(failed_cases)}\n")
+
+    # Display predictions
+    print(f"\n=== Predictions ===")
+    for pred in predictions:
+        print(f"Case {pred['index']}: Features: {pred['features']}, Prediction: {pred['prediction']}, "
+              f"Ground Truth: {pred['ground_truth']}, Status: {pred['status']}")
 
     # Assertions for CI/CD pipeline
-    if accuracy >= 0.9:
-        print(f"Accuracy is below 90%. Achieved: {accuracy * 100:.2f}%")
-    elif len(failed_cases) == 0:
-        print(f"Test failed for {len(failed_cases)} cases. See logs for details.")
-    elif average_latency < 1.0:
-        print("Average latency exceeds 1 second. Needs optimization.")
-
+    assert accuracy >= 0.9, f"Accuracy is below 90%. Achieved: {accuracy * 100:.2f}%"
+    assert len(failed_cases) == 0, f"Test failed for {len(failed_cases)} cases. See logs for details."
+    assert average_latency < 1.0, "Average latency exceeds 1 second. Needs optimization."
