@@ -2,7 +2,8 @@ import mlflow
 from mlflow.tracking import MlflowClient
 
 # The tracking URI for the MLflow server
-mlflow.set_tracking_uri("http://37.152.191.193:8080")
+# mlflow.set_tracking_uri("http://37.152.191.193:8080")
+mlflow.set_tracking_uri("http://127.0.0.1:5000")
 print(f"Tracking URI: {mlflow.get_tracking_uri()}")
 
 # Initialize the MLflow client
@@ -64,7 +65,7 @@ if experiment:
                     print(param_info)
 
     # Write all collected data to the log file at once
-    log_file_path = "version_manager.txt"
+    log_file_path = "version_manager/version_manager.txt"
     with open(log_file_path, "w") as log_file:
         log_file.writelines(log_data)
 
@@ -73,7 +74,7 @@ if experiment:
         mlflow.log_artifact(log_file_path)
         print(f"Version comparison results logged as an artifact in experiment '{experiment_name}'.")
 
-    print("\nVersion comparison log has been saved to 'version_manager.txt'")
+    print("\nVersion comparison log has been saved to 'version_manager/version_manager.txt'")
 
 else:
     print(f"Experiment '{experiment_name}' not found.")

@@ -1,0 +1,29 @@
+Tracking URI: http://127.0.0.1:5000
+
+Experiment ID: 1
+Experiment Name: Heart Disease Prediction1
+
+Model Name: heart_disease_classifier
+  Version: 1, Stage: Production, Status: READY
+    Metrics:
+      accuracy: 0.9180327868852459
+      cv_mean: 0.80578231292517
+      cv_std: 0.033153888435383534
+      training_time: 0.0066416263580322266
+      class_0_precision: 0.9
+      class_0_recall: 0.9310344827586207
+      class_0_f1: 0.9152542372881356
+      class_0_support: 29.0
+      class_1_precision: 0.9354838709677419
+      class_1_recall: 0.90625
+      class_1_f1: 0.9206349206349206
+      class_1_support: 32.0
+      true_negatives: 27.0
+      false_positives: 2.0
+      false_negatives: 3.0
+      true_positives: 29.0
+    Parameters:
+      n_neighbors: 7
+      weights: uniform
+      metric: euclidean
+      algorithm: auto
