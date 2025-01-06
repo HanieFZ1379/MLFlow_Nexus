@@ -1,15 +1,17 @@
 import mlflow
 import pandas as pd
+import matplotlib.pyplot as plt
 
 # Set the tracking URI for MLflow server
-mlflow.set_tracking_uri('http://37.152.191.193:8080')
-
+# mlflow.set_tracking_uri('http://37.152.191.193:8080')
+# If you don't want to set up an MLflow tracking server, use the default local file-based tracking
+mlflow.set_tracking_uri('http://127.0.0.1:5000')
 # Experiment name
 experiment_name = 'Heart Disease Prediction1'
 
 # Get experiment by name
 experiment = mlflow.get_experiment_by_name(experiment_name)
-
+print(experiment)
 if experiment is None:
     print(f"Experiment '{experiment_name}' not found. Please check the experiment name.")
 else:
@@ -93,3 +95,29 @@ else:
 
     else:
         print("No runs found for this experiment.")
+
+# Load experiment results (from MLflow or CSV)
+data = pd.read_csv ('compare_runs.csv')
+results = pd.DataFrame (data)
+print(results)
+
+# Line plot for accuracy comparison across all runs
+results.plot(x='run_id', y='metrics.accuracy', kind='line', figsize=(10, 6), color='b', marker='o')
+
+plt.title('Accuracy Comparison Across All Runs', fontsize=14)
+plt.xlabel('Run ID', fontsize=12)
+plt.ylabel('Accuracy', fontsize=12)
+plt.grid(alpha=0.5)
+plt.tight_layout()
+plt.savefig('compare_runs_images/Accuracy.png')  # Save as PNG file
+
+# Histogram for distribution of accuracy across all runs
+plt.figure(figsize=(10, 6))
+plt.hist(results['metrics.accuracy'], bins=10, color='g', edgecolor='black', alpha=0.7)
+
+plt.title('Distribution of Accuracy Across All Runs', fontsize=14)
+plt.xlabel('Accuracy', fontsize=12)
+plt.ylabel('Frequency', fontsize=12)
+plt.grid(alpha=0.5)
+plt.tight_layout()
+plt.savefig('compare_runs_images/Accuracy_distribiuation.png')  # Save as PNG file
