@@ -52,7 +52,7 @@ else:
 
             # Print detailed metrics for all runs and log them as an artifact
             print("\nDetailed Metrics for All Runs:")
-            with open("compare_runs.txt", "w") as log_file:
+            with open("compare_runs_images/compare_runs.txt", "w") as log_file:
                 # Log best run details
                 log_file.write(f"Best Run (Accuracy):\n")
                 log_file.write(f"Run ID: {best_run_id}\n")
@@ -89,7 +89,7 @@ else:
                     print("=" * 60)
 
             # Log the detailed metrics text file as an artifact
-            mlflow.log_artifact("compare_runs.txt")
+            mlflow.log_artifact("compare_runs_images/compare_runs.txt")
 
         print("\nReport and detailed metrics saved and logged as artifacts in MLflow.")
 
@@ -97,7 +97,7 @@ else:
         print("No runs found for this experiment.")
 
 # Load experiment results (from MLflow or CSV)
-data = pd.read_csv ('compare_runs.csv')
+data = pd.read_csv ('compare_runs_images/compare_runs.csv')
 results = pd.DataFrame (data)
 print(results)
 
