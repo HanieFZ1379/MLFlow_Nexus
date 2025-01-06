@@ -1,0 +1,52 @@
+Tracking URI: http://37.152.191.193:8080
+
+Experiment ID: 332425260785487175
+Experiment Name: Heart Disease Prediction1
+
+Model Name: heart_disease_classifier
+  Version: 1, Stage: Archived, Status: READY
+    Metrics:
+      class_1_f1: 0.7619047619047619
+      cv_mean: 0.7106292517006803
+      class_1_support: 32.0
+      cv_std: 0.0354292970185999
+      accuracy: 0.7540983606557377
+      false_negatives: 8.0
+      class_0_precision: 0.7333333333333333
+      false_positives: 7.0
+      training_time: 0.018556833267211914
+      true_positives: 24.0
+      class_1_recall: 0.75
+      class_0_recall: 0.7586206896551724
+      true_negatives: 22.0
+      class_0_support: 29.0
+      class_0_f1: 0.7457627118644068
+      class_1_precision: 0.7741935483870968
+    Parameters:
+      metric: chebyshev
+      weights: uniform
+      n_neighbors: 3
+      algorithm: ball_tree
+  Version: 2, Stage: Production, Status: READY
+    Metrics:
+      class_1_f1: 0.9206349206349206
+      cv_mean: 0.8058673469387756
+      class_1_support: 32.0
+      cv_std: 0.044132243454248495
+      accuracy: 0.9180327868852459
+      false_negatives: 3.0
+      class_0_precision: 0.9
+      false_positives: 2.0
+      training_time: 0.0043792724609375
+      true_positives: 29.0
+      class_1_recall: 0.90625
+      class_0_recall: 0.9310344827586207
+      true_negatives: 27.0
+      class_0_support: 29.0
+      class_0_f1: 0.9152542372881356
+      class_1_precision: 0.9354838709677419
+    Parameters:
+      metric: euclidean
+      weights: uniform
+      n_neighbors: 5
+      algorithm: auto

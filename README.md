@@ -28,3 +28,57 @@ MLflow Integration:
     - --host: Set to 0.0.0.0 to allow access from other devices.
     - --port: Port on which the server will run.
     Now the MLflow UI is running, Navigate to http://37.152.191.193:8080/ .
+
+
+# Steps For Visualizing Experiment Results
+
+## Step 1: Open MLflow UI
+- Open the MLflow UI at [http://37.152.191.193:8080](http://37.152.191.193:8080).
+
+## Step 2: Navigate to the Experiment and Analyze Metrics
+- **Locate Experiments**: From the UI's home screen, find the list of experiments and click the experiment name to view its runs.
+- **Visualize Metrics**: Switch to the Chart View under the Metrics tab to compare trends across runs. Use this view to analyze performance metrics visually.
+- **Download or Export Results Manually**:
+  - **Download CSV**: Click "Download CSV" on the experiment page to save all run data (parameters, metrics, tags, etc.) for further analysis in tools like Excel or Python.
+  - **Export Plots**: Use the export button near the plots to download chart images for presentations or reports.
+
+## Step 3: View Experiment Runs
+- The main experiment view displays a table with:
+  - **Run ID**: A unique identifier for each run.
+  - **Parameters**: Input parameters logged during training.
+  - **Metrics**: Output metrics logged during training (e.g., accuracy).
+  - **Artifacts**: Links to logged models or additional files.
+- Use filters (above the table) to narrow down runs based on specific parameters or metrics:
+  - Filter runs with accuracy > 0.90.
+  - Sort by any column, such as accuracy, to identify the best-performing model.
+
+## Step 4: Compare and Visualize Experiment Results
+- **Compare Multiple Runs**:
+  - **Select Runs**: Check the boxes next to the runs you want to compare and click "Compare" to open the comparison view.
+  - **Comparison View**:
+    - **Metrics and Parameters**: View side-by-side bar graphs or tables showing metrics (e.g., accuracy) and parameters, helping analyze their impact.
+    - **Visualization Options**: Switch between table and graphical views or use line charts to analyze trends over time (if metrics are logged iteratively).
+- **Visualize Metrics**:
+  - **Open Metric Plots**: Click on a specific metric (e.g., accuracy) in the table to view its plot.
+  - **Customize Plots**: Adjust axes, zoom into key regions, overlay multiple metrics (e.g., accuracy vs. loss), and choose "Line" or "Scatter" plot types for deeper insights.
+
+## Step 5: Create a Comparison Report of Different Runs by Writing a Python Script
+- **Create a new Python script**: `compare_runs.py`.
+- **Install Dependencies**:
+  ```bash
+  pip install mlflow pandas
+- **Run the Script**:
+  ```bash
+  python compare_runs.py
+
+The script will print the best run and its associated metrics, including details like the run ID, parameters, and other metrics. It will also save a CSV file named experiment_results.csv in the same directory, containing all experiment runs for further analysis. Additionally, the script uses the MLflow Client to fetch and display detailed information about each run, such as metrics and parameters, enabling a deeper understanding of the experiment's results.
+
+•  For visual analysis and quick access, use Download CSV from Step 2.
+•  For deeper, programmatic analysis, use the Python script in Step 5.
+
+## Step 6: Final Interpretation of Results
+- Analyze the effect of different parameters on metrics
+  
+- Identify anomalies or patterns, such as:
+  - Significant drop in accuracy with certain parameter combinations.
+  - Plateauing of metric improvement.
