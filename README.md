@@ -1,4 +1,4 @@
-# Machine Learning Workflow with MLflow
+    # Machine Learning Workflow with MLflow
 This repository contains the implementation of a comprehensive machine learning workflow, integrating MLflow for experiment tracking and model registry. The project is divided into below parts:
 
 MLflow Integration:
@@ -249,13 +249,14 @@ This project contains two versions of the heart disease prediction model. Below 
 ----
 # Evaluation of The Deployed Model On The Test Dataset
 
+![Evaluation Results](compare_runs_images//latency.png)
+
+
 ## **Key Observations**
 
 1. **•	Accuracy:** The model achieved an accuracy of **76.92%** on the test dataset.
 
 2. **•	Latency:** The average prediction latency per sample is approximately **0.0066 seconds**, indicating efficient performance suitable for real-time applications.
-
-
 
 ---
 
