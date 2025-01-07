@@ -1,4 +1,4 @@
-    # Machine Learning Workflow with MLflow
+# Machine Learning Workflow with MLflow
 This repository contains the implementation of a comprehensive machine learning workflow, integrating MLflow for experiment tracking and model registry. The project is divided into below parts:
 
 MLflow Integration:
