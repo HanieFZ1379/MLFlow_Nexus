@@ -249,7 +249,7 @@ This project contains two versions of the heart disease prediction model. Below 
 ----
 # Evaluation of The Deployed Model On The Test Dataset
 
-![Evaluation Results](images/latency.png)
+![Evaluation Results](compare_runs_images//latency.png)
 
 
 ## **Key Observations**
