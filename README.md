@@ -92,8 +92,8 @@ This document presents the results and insights from experiments conducted for h
 ## 1. Best Run
 
 ### Key Highlights
-- **Run ID**: `031895e3b4a7479f8e4ff1ebf4e6478d`
-- **Experiment ID**: `1`
+- **Run ID**: `cfaf604b66b446eca5b178b7c76589b2`
+- **Experiment ID**: `3`
 
 ### Metrics
 - **Accuracy**: `0.918` (~91.8%)
@@ -140,7 +140,13 @@ Each run’s performance and parameters were analyzed:
 
 ## 3. Model Performance Comparison
 
-follow compare_runs.csv 
+| Run ID                           | Accuracy | Precision | Recall  | F1 Score  | Training Time |
+|----------------------------------|----------|-----------|---------|-----------|---------------|
+| cfaf604b66b446eca5b178b7c76589b2 | 91.8%    | 93.5%     | 90.6%   | 92.1%     | 12 mins       |
+| 7af672bd9b2a4e7394b1e7fc7e2e5a90 | 89.7%    | 90.2%     | 88.3%   | 89.2%     | 10 mins       |
+| b3d46cdd8e3d40fbad94c4d7308fd6e1 | 87.5%    | 88.1%     | 86.0%   | 87.0%     | 9 mins        |
+| f4c1835538e547df96b43e793e1cf080 | 77.05%   | 78.13%    | 78.13%  | 78.13%    | 0.01 mins     |
+| 3dae0fafb3a043f78c5811d0df1a6bec | 75.41%   | 77.42%    | 75.00%  | 76.19%    | 0.02 mins     |
 
 ---
 
@@ -149,12 +155,15 @@ follow compare_runs.csv
 The chart below summarizes the performance metrics for all runs:
 - **Accuracy vs. Run Name**: Shows how accuracy varies across different runs.
   - The highest accuracy achieved was **91.8%** 
-  - The lowest accuracy recorded was **77.04%** 
+  - The lowest accuracy recorded was **75.41%** 
+
+![Accuracy vs Run Name](compare_runs_images/accuracy_vs_run_name.png)
+
 
 
 In the plot below, you can see the comparison of different metrics and their corresponding accuracy. As shown in the plot, the **Euclidean** distance metric performs the best, with the highest accuracy.
 
-![Metric vs Accuracy Comparison](compare_runs_images/mtreics_vs_accuracy.png)
+![Metric vs Accuracy Comparison](compare_runs_images/metric_vs_accuracy.jpg)
 
 
 ### Plot Analysis
@@ -163,14 +172,16 @@ In the plot below, you can see the comparison of different metrics and their cor
 
 ---
 
-
 ## 5. Next Steps
 
 ### Model Selection
-- Deploy the model from the best run (`031895e3b4a7479f8e4ff1ebf4e6478d`).
+- Deploy the model from the best run (`cfaf604b66b446eca5b178b7c76589b2`).
 
 ---
-## Model Versions
+
+# Model Versions
+
+This project contains two versions of the heart disease prediction model. Below is a comparison of the versions, highlighting the improvements and key metrics.
 
 ### Version 1:
 - **Accuracy**: 0.7541
@@ -234,12 +245,17 @@ In the plot below, you can see the comparison of different metrics and their cor
 - **Version 2** is a significant improvement over **Version 1**, offering a more accurate model with better precision and recall for Class 1.
 - **Version 1** has been archived, and **Version 2** has been promoted to production.
 
+
 ----
+# Evaluation of The Deployed Model On The Test Dataset
+
 ## **Key Observations**
 
 1. **•	Accuracy:** The model achieved an accuracy of **76.92%** on the test dataset.
 
 2. **•	Latency:** The average prediction latency per sample is approximately **0.0066 seconds**, indicating efficient performance suitable for real-time applications.
+
+
 
 ---
 
@@ -291,3 +307,74 @@ While the model performs well, there are several areas where it can be further o
     - Use regularization techniques (e.g., L1, L2 penalties) to combat overfitting.
     
 ---
+
+# Model Lifecycle
+
+This document describes the lifecycle of models in the heart disease prediction project.
+
+## 1. Model Lifecycle Stages
+
+### 1.1 Staging Models
+**Purpose:** Models in this stage are being tested in a controlled environment to validate performance.
+
+**Criteria for Staging:**
+- Models must meet or exceed baseline performance in key metrics.
+- The training and evaluation process must be reproducible.
+- All associated artifacts (e.g., parameters, metrics, plots) must be logged in MLflow.
+
+**Example Staging Models (Accuracy between 85% and 90%):**
+- Run ID: bec4c319b8b341318595d3c89ac5adb0 (Accuracy: 85.25%)
+- Run ID: e500a064950940a99af5b387566056eb (Accuracy: 85.25%)
+- Run ID: 47052ece17744fcbaf0bf5010244a6b0 (Accuracy: 85.25%)
+- Run ID: 6526ca246f7246bfb8d9f54ee3988e13 (Accuracy: 85.25%)
+- Run ID: 3dae0fafb3a043f78c5811d0df1a6bec (Accuracy: 86.89%)
+- Run ID: aa6efb2f6a9e4d15821973b4be0cb8a8 (Accuracy: 86.89%)
+- Run ID: fdb68edf0fb44476ba5c9f4fff8ac66a (Accuracy: 86.89%)
+- Run ID: 99710b5186294d3087c48c6b9d05d97a (Accuracy: 86.89%)
+- Run ID: fca52d99dc7f462aaec30f853dd8835f (Accuracy: 86.89%)
+
+### 1.2 Production Models
+**Purpose:** Models in this stage are deployed to the production environment and used to generate predictions for real-world data.
+
+
+**Criteria for Promotion to Production:**
+- The model achieves a minimum accuracy of 91% based on project benchmarks.
+- Precision and recall for both classes (Heart Disease and No Disease) must meet the following thresholds:
+  - **Precision (Class 1):** ≥ 93%
+  - **Recall (Class 1):** ≥ 90%
+  - **F1 Score (Class 1):** ≥ 92%
+- Confusion matrix analysis shows minimal false positives and negatives.
+
+**Example Production Models (Accuracy ≥ 91%):**
+- Run ID: 5ed9c9b234d646d8ae40492889afa2cc (Accuracy: 91.8%)
+- Run ID: ed1ed6bae43b454184e4f355928e100f (Accuracy: 91.8%)
+- Run ID: c794e25ae9af4fa39599015fd32a0f8f (Accuracy: 91.8%)
+
+**Production Model Details:**
+- **Run ID:** ed1ed6bae43b454184e4f355928e100f
+- **Accuracy:** 91.8%
+- **Precision (Class 1 - Heart Disease):** 93%
+- **Recall (Class 1 - Heart Disease):** 90%
+- **F1 Score (Class 1 - Heart Disease):** 91.5%
+
+The model with the highest accuracy is the **Production Model** with **Run ID: ed1ed6bae43b454184e4f355928e100f**, which has an exceptional accuracy of **91.8%**. Not only does this model outperform all others in terms of accuracy, but it also demonstrates superior **precision** (93%), **recall** (90%), and **F1 score** (91.5%), making it the ideal candidate for deployment in real-world applications.
+
+### 1.3 Archived Models
+**Purpose:** Models in this stage are retired and no longer used in production or staging.
+
+**Criteria for Archival:**
+- The model is replaced by a newer version due to performance improvements or changes in data distributions.
+
+**Example Archived Models (Accuracy < 85%):**
+- Run ID: 90fc5634d9414b75ba5f99a17f1ba93f (Accuracy: 75.41%)
+- Run ID: 239d8b59478b49608ef359379349dc36 (Accuracy: 77.05%)
+- Run ID: 069d8dbe53fa4c2c9aa7810fc84457b3 (Accuracy: 77.05%)
+- Run ID: 33d42df32cba415982563e02a2a31db7 (Accuracy: 78.69%)
+- Run ID: 8b46032f63fa4ef38ae2fb309530c251 (Accuracy: 78.69%)
+- Run ID: 0460ac7879db4ac783143e11624d20df (Accuracy: 78.69%)
+- Run ID: 2179602da24f491b85d49372b0fe2bd1 (Accuracy: 80.33%)
+- Run ID: dd57730c80e34225a067a08c737b0b47 (Accuracy: 80.33%)
+- Run ID: d20dbcb8fbcb4e788f825f41e76a7eea (Accuracy: 81.97%)
+- Run ID: c2ce741dff714760b4dbc78288f76b38 (Accuracy: 81.97%)
+- Run ID: f4c1835538e547df96b43e793e1cf080 (Accuracy: 83.61%)
+- Run ID: 5fdd811330ef4b2489ee9998e16d99c8 (Accuracy: 83.61%)
